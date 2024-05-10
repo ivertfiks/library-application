@@ -1,7 +1,7 @@
-package com.todoapp.controller;
+package com.libraryapp.controller;
 
-import com.todoapp.entity.Author;
-import com.todoapp.service.AuthorService;
+import com.libraryapp.entity.Author;
+import com.libraryapp.service.AuthorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,20 +20,20 @@ public class AuthorController{
     @Autowired
     private AuthorService authorService;
 
-    @PostMapping("authors/create")
+    @PostMapping("/authors/create")
     public ResponseEntity<Author> create(@RequestParam("name") String name){
         log.info("Response call to authors/create");
         return ResponseEntity.ok(authorService.getAuthorByName(name));
     }
-    @GetMapping("authors/getall")
+    @GetMapping("/authors/list")
     public ResponseEntity<List<Author>> getAll(){
         return ResponseEntity.ok(authorService.getAll());
     }
-    @GetMapping("authors/getbyid")
+    @GetMapping("/authors/getAuthorById")
     public ResponseEntity<Optional<Author>> getAuthorById(@RequestParam("id") int id){
         return ResponseEntity.ok(authorService.getById(id));
     }
-    @DeleteMapping("authors/deletebyid")
+    @DeleteMapping("/authors/deleteAuthorById")
     public void deleteById(@RequestParam("id") int id){
         authorService.deleteById(id);
     }

@@ -1,4 +1,4 @@
-package com.todoapp.entity;
+package com.libraryapp.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

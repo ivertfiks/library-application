@@ -1,10 +1,9 @@
-package com.todoapp.service;
+package com.libraryapp.service;
 
-import com.todoapp.entity.Author;
-import com.todoapp.entity.Book;
-import com.todoapp.entity.enums.BookEnum;
-import com.todoapp.repository.AuthorRepository;
-import com.todoapp.repository.BookRepository;
+import com.libraryapp.entity.Author;
+import com.libraryapp.entity.Book;
+import com.libraryapp.entity.enums.BookEnum;
+import com.libraryapp.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

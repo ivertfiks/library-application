@@ -1,7 +1,7 @@
-package com.todoapp.controller;
+package com.libraryapp.controller;
 
-import com.todoapp.entity.Book;
-import com.todoapp.service.BookService;
+import com.libraryapp.entity.Book;
+import com.libraryapp.service.BookService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,26 +19,26 @@ import java.util.Optional;
 public class BookController {
     @Autowired
     private BookService bookService;
-    @PostMapping("books/create")
+    @PostMapping("/books/create")
     public ResponseEntity<Book> create(@RequestParam("title") String title,
                                        @RequestParam("name") String name,
                                        @RequestParam("genre") String genre){
         log.info("Response call to /books/create");
         return ResponseEntity.ok(bookService.create(title, name, genre));
     }
-    @GetMapping("books/getall")
+    @GetMapping("/books/list")
     public ResponseEntity<List<Book>> getAll(){
-        log.info("Response call to /books/getall");
+        log.info("Response call to /books/list");
         return ResponseEntity.ok(bookService.getAll());
     }
-    @GetMapping("books/getbyid")
+    @GetMapping("/books/getBookById")
     public ResponseEntity<Optional<Book>> getBookById(@RequestParam("id") int id){
-        log.info("Response call to /books/getbookbyid");
+        log.info("Response call to /books/getBookById");
         return ResponseEntity.ok(bookService.getById(id));
     }
-    @DeleteMapping("books/deletebyid")
+    @DeleteMapping("/books/deleteBookById")
     public void deleteBookById(int id){
-        log.info("Response call to /books/deletebookbyid");
+        log.info("Response call to /books/deleteBookById");
         bookService.deleteById(id);
     }
 }

@@ -1,4 +1,4 @@
-package com.todoapp.entity.enums;
+package com.libraryapp.entity.enums;
 
 public enum BookEnum {
     FANTASY("Fantasy"),

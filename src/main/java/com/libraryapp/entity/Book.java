@@ -1,6 +1,6 @@
-package com.todoapp.entity;
+package com.libraryapp.entity;
 
-import com.todoapp.entity.enums.BookEnum;
+import com.libraryapp.entity.enums.BookEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,7 +1,7 @@
-package com.todoapp.service;
+package com.libraryapp.service;
 
-import com.todoapp.entity.Author;
-import com.todoapp.repository.AuthorRepository;
+import com.libraryapp.entity.Author;
+import com.libraryapp.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
