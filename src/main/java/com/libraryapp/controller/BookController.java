@@ -27,7 +27,7 @@ public class BookController {
         return ResponseEntity.ok(bookService.create(title, name, genre));
     }
     @GetMapping("/books/list")
-    public ResponseEntity<List<Book>> getAll(){
+    public ResponseEntity<List<Book>> getAllBooks(){
         log.info("Response call to /books/list");
         return ResponseEntity.ok(bookService.getAll());
     }

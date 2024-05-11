@@ -2,7 +2,7 @@ package com.libraryapp.service;
 
 import com.libraryapp.entity.Author;
 import com.libraryapp.entity.Book;
-import com.libraryapp.entity.enums.BookEnum;
+import com.libraryapp.entity.enums.BookGenre;
 import com.libraryapp.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class BookService {
         if(author == null){
             author = authorService.create(name);
         }
-        Book book = new Book(title, author, BookEnum.valueOf(genre.toUpperCase()));
+        Book book = new Book(title, author, BookGenre.valueOf(genre.toUpperCase()));
         return bookRepository.save(book);
     }
 
