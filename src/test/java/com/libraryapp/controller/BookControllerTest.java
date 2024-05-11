@@ -18,13 +18,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(addFilters = false)
 public class BookControllerTest {
 
     @MockBean
@@ -54,7 +55,7 @@ public class BookControllerTest {
         when(bookService.create("Harry Potter", "J.K.Rowling", BookGenre.FANTASY.toString())).thenReturn(book);
         mockMvc.perform(post("/books/create")
                         .param("title", "Harry Potter")
-                        .param("authorName", "J.K.Rowling")
+                        .param("name", "J.K.Rowling")
                         .param("genre", BookGenre.FANTASY.toString())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -67,7 +68,7 @@ public class BookControllerTest {
         Book book = new Book("Harry Potter", author, BookGenre.FANTASY);
         book.setId(1);
         int expectedId = 1;
-        when(bookService.getById(expectedId)).thenReturn(Optional.of(book));
+        when(bookService.getById(expectedId)).thenReturn(book);
         mockMvc.perform(get("/books/getBookById")
                         .param("id", "1")
                         .contentType(MediaType.APPLICATION_JSON))
@@ -75,16 +76,25 @@ public class BookControllerTest {
     }
 
     @Test
-    public void deleteBookById_shouldReturnBook() throws Exception {
+    public void deleteBookById_shouldDeleteBook() throws Exception {
         Author author = new Author("J.K.Rowling");
         Book book = new Book("Harry Potter", author, BookGenre.FANTASY);
         book.setId(1);
-        bookService.create("Harry Potter", "J.K.Rowling", BookGenre.FANTASY.toString());
-        Assertions.assertNotNull(bookService.getById(1));
+        when(bookService.getById(1)).thenReturn(book);
         mockMvc.perform(delete("/books/deleteBookById")
                         .param("id", "1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+        Assertions.assertNotNull(bookService.getById(1));
+    }
+
+    @Test
+    public void deleteBookById_shouldNotDeleteBook() throws Exception {
+        when(bookService.getById(1)).thenReturn(null);
+        mockMvc.perform(delete("/books/deleteBookById")
+                .param("id", "1")
+                .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isBadRequest());
         Assertions.assertNull(bookService.getById(1));
     }
 }

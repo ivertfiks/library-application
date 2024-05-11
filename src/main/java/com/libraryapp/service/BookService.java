@@ -30,8 +30,8 @@ public class BookService {
         return (List<Book>) bookRepository.findAll();
     }
 
-    public Optional<Book> getById(int id){
-        return bookRepository.findById(id);
+    public Book getById(int id){
+        return bookRepository.findById(id).get();
     }
 
     public void deleteById(int id){
