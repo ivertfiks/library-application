@@ -2,7 +2,7 @@ package com.libraryapp.controller;
 
 import com.libraryapp.entity.Author;
 import com.libraryapp.service.AuthorService;
-import org.junit.jupiter.api.Assertions;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -14,7 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -54,23 +54,27 @@ public class AuthorControllerTest {
         Author author = new Author("J.K.Rowling");
         author.setId(1);
         int expectedId = 1;
-        when(authorService.getById(expectedId)).thenReturn(Optional.of(author));
+        when(authorService.getById(expectedId)).thenReturn(author);
         mockMvc.perform(get("/authors/getAuthorById")
                         .param("id", "1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
-
     @Test
     public void deleteAuthorById_shouldDeleteAuthor() throws Exception {
-        Author author = new Author("J.K.Rowling");
-        authorService.create("J.K.Rowling");
-        Assertions.assertNotNull(authorService.getById(1));
+        Author author = new Author();
+        author.setId(1);
+        when(authorService.getById(1)).thenReturn(author);
         mockMvc.perform(delete("/authors/deleteAuthorById")
-                        .param("id", "1")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-        Assertions.assertNull(authorService.getById(1));
+                .param("id", "1")
+                .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+    }
+    @Test
+    public void deleteAuthorById_shouldNotDeleteAuthor() throws Exception {
+        when(authorService.getById(1)).thenReturn(null);
+        mockMvc.perform(delete("/authors/deleteAuthorById")
+                .param("id", "1")
+                .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isBadRequest());
     }
 
 }

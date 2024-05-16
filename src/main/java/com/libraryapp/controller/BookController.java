@@ -45,7 +45,7 @@ public class BookController {
     }
 
     @DeleteMapping("/books/deleteBookById")
-    public ResponseEntity<?> deleteBookById(int id) {
+    public ResponseEntity<?> deleteBookById(@RequestParam("id") int id) {
         log.info("Response call to /books/deleteBookById");
         Book bookToDelete = bookService.getById(id);
         if (bookToDelete != null) {
