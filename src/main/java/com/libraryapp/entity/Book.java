@@ -1,6 +1,6 @@
 package com.libraryapp.entity;
 
-import com.libraryapp.entity.enums.BookEnum;
+import com.libraryapp.entity.enums.BookGenre;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,9 +18,9 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "authors_id")
     private Author name;
-    private BookEnum genre;
+    private BookGenre genre;
 
-    public Book(String title, Author name, BookEnum genre) {
+    public Book(String title, Author name, BookGenre genre) {
         this.title = title;
         this.name = name;
         this.genre = genre;

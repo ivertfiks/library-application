@@ -4,6 +4,7 @@ import com.libraryapp.entity.Author;
 import com.libraryapp.service.AuthorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,19 +23,28 @@ public class AuthorController{
 
     @PostMapping("/authors/create")
     public ResponseEntity<Author> create(@RequestParam("name") String name){
-        log.info("Response call to authors/create");
+        log.info("Response call to /authors/create");
         return ResponseEntity.ok(authorService.getAuthorByName(name));
     }
     @GetMapping("/authors/list")
-    public ResponseEntity<List<Author>> getAll(){
+    public ResponseEntity<List<Author>> getAllAuthors(){
+        log.info("Response call to /authors/list");
         return ResponseEntity.ok(authorService.getAll());
     }
     @GetMapping("/authors/getAuthorById")
-    public ResponseEntity<Optional<Author>> getAuthorById(@RequestParam("id") int id){
+    public ResponseEntity<Author> getAuthorById(@RequestParam("id") int id){
+        log.info("Response call to /authors/getAuthorById");
         return ResponseEntity.ok(authorService.getById(id));
     }
     @DeleteMapping("/authors/deleteAuthorById")
-    public void deleteById(@RequestParam("id") int id){
-        authorService.deleteById(id);
+    public ResponseEntity<?> deleteAuthorById(@RequestParam("id") int id){
+        log.info("Response call to /authors/deleteAuthorById");
+        Author authorToDelete = authorService.getById(id);
+        if(authorToDelete != null){
+            authorService.deleteById(id);
+            return ResponseEntity.ok(authorToDelete);
+        }else {
+            return new ResponseEntity<>("Cannot remove author as it doesn't exist: ", HttpStatus.BAD_REQUEST);
+        }
     }
 }

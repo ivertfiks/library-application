@@ -1,6 +1,6 @@
 package com.libraryapp.entity.enums;
 
-public enum BookEnum {
+public enum BookGenre {
     FANTASY("Fantasy"),
     SCIENCE_FICTION("Science Fiction"),
     MYSTERY("Mystery"),
@@ -21,7 +21,7 @@ public enum BookEnum {
 
     private final String genreName;
 
-    BookEnum(String genreName) {
+    BookGenre(String genreName) {
         this.genreName = genreName;
     }
 
