@@ -39,4 +39,8 @@ public class BookService {
     public void deleteById(int id) {
         bookRepository.deleteById(id);
     }
+
+    //TODO: add method to get books by author
+
+    //TODO: add method to get books by genre
 }

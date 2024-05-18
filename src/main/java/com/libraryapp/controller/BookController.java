@@ -55,4 +55,8 @@ public class BookController {
             return new ResponseEntity<>("Cannot remove book as it doesn't exist: ",HttpStatus.BAD_REQUEST);
         }
     }
+
+    //TODO: add method to get books by author name
+
+    //TODO: add method to get books by genre
 }

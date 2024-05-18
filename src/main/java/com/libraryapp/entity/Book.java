@@ -15,6 +15,7 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String title;
+
     @ManyToOne
     @JoinColumn(name = "authors_id")
     private Author name;

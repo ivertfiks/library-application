@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "authors")
-public class Author{
+public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
