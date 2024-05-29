@@ -1,0 +1,10 @@
+0. Add dependencies to the pom.xml
+1. Create User class with name, username and password fields
+2. Implement UserDetails interface and its methods in the User class
+3. Create UserRepository and add a custom method User loadUserByUsername
+4. Create UserService and implement methods create, loadUserByUsername, getAllUsers and others (check TODOs).
+   Make sure to encrypt password
+5. Create AuthorisationService and implement there UserDetailsService
+6. Add BCryptPasswordEncoder to the main method having class
+7. Create UserController with endpoints /users/register, /users/list
+8. Create SecurityConfig class (see the branch for details of implementation)
