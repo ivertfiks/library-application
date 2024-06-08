@@ -40,6 +40,14 @@ public class BookService {
         bookRepository.deleteById(id);
     }
 
+    public List<Book> getBooksByAuthor(Author author){
+        return bookRepository.getBooksByAuthor(author);
+    }
+
+    public List<Book> getBooksByGenre(BookGenre genre){
+        return getBooksByGenre(genre);
+    }
+
     //TODO: add method to get books by author
 
     //TODO: add method to get books by genre
