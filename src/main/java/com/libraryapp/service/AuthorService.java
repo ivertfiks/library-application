@@ -18,7 +18,6 @@ public class AuthorService {
         Author author = new Author(name);
         return authorRepository.save(author);
     }
-
     public Author getAuthorByName(String name){
         return authorRepository.getAuthorByName(name);
     }

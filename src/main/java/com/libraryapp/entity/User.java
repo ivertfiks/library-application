@@ -26,15 +26,15 @@ public class User implements UserDetails {
     private String username;
     private String password;
 
-    @OneToOne
+    @OneToMany
     @JoinColumn(name = "finishedBooks_id")
     private List<Book> finishedBooks;
 
-    @OneToOne
+    @OneToMany
     @JoinColumn(name = "readingBooks_id")
     private List<Book> readingBooks;
 
-    @OneToOne
+    @OneToMany
     @JoinColumn(name = "wantToReadBooks_id")
     private List<Book> wantToReadBooks;
 

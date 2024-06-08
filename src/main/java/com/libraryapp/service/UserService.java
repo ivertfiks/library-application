@@ -17,7 +17,7 @@ public class UserService {
     private final BCryptPasswordEncoder encoder;
 
     public User createUser(String username, String password, String name) throws DuplicateUserException {
-        User user = userRepository.loadUserByUsername(username);
+        User user = userRepository.getUserByUsername(username);
         if(user == null) {
             return userRepository.save(new User(username, encoder.encode(password), name));
         }
@@ -25,11 +25,11 @@ public class UserService {
     }
 
     public User getUserByUsername(String username){
-        return userRepository.loadUserByUsername(username);
+        return userRepository.getUserByUsername(username);
     }
 
     public void deleteUserByUsername(String username){
-        userRepository.delete(username);
+        userRepository.deleteUserByUsername(username);
     }
 
     public List<User> getAllUsers(){
@@ -41,7 +41,7 @@ public class UserService {
     }
 
     public void updatePasswordByUsername(String username, String newPassword){
-        User user = userRepository.loadUserByUsername(username);
+        User user = userRepository.getUserByUsername(username);
         String encodedPassword = encoder.encode(newPassword);
         user.setPassword(encodedPassword);
         userRepository.save(user);

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
-    @Autowired
-    User loadUserByUsername(String username);
-    @Autowired
-    void delete(String username);
+
+    User getUserByUsername(String username);
+
+    void deleteUserByUsername(String username);
 }

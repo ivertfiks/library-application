@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Book {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -18,12 +19,12 @@ public class Book {
 
     @ManyToOne
     @JoinColumn(name = "authors_id")
-    private Author name;
+    private Author author;
     private BookGenre genre;
 
     public Book(String title, Author name, BookGenre genre) {
         this.title = title;
-        this.name = name;
+        this.author = name;
         this.genre = genre;
     }
 }
