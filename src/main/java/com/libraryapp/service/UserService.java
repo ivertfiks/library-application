@@ -4,13 +4,14 @@ import com.libraryapp.entity.User;
 import com.libraryapp.entity.exceptions.DuplicateUserException;
 import com.libraryapp.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
@@ -19,9 +20,9 @@ public class UserService {
     public User createUser(String username, String password, String name) throws DuplicateUserException {
         User user = userRepository.getUserByUsername(username);
         if(user == null) {
-            return userRepository.save(new User(username, encoder.encode(password), name));
+            return userRepository.save(new User(name, username, encoder.encode(password)));
         }
-        throw new DuplicateUserException("Duplicate user: " + username);
+        throw new DuplicateUserException("Duplicate user: " + username + "\nYou should choose another username...");
     }
 
     public User getUserByUsername(String username){
