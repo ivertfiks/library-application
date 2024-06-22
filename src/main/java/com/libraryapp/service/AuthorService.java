@@ -2,6 +2,7 @@ package com.libraryapp.service;
 
 import com.libraryapp.entity.Author;
 import com.libraryapp.repository.AuthorRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,16 +10,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class AuthorService {
 
-    @Autowired
-    private AuthorRepository authorRepository;
+    private final AuthorRepository authorRepository;
 
     public Author create(String name){
         Author author = new Author(name);
         return authorRepository.save(author);
     }
-
     public Author getAuthorByName(String name){
         return authorRepository.getAuthorByName(name);
     }

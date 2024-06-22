@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
-public class BookControllerTest {
+class BookControllerTest {
 
     @MockBean
     private BookService bookService;
@@ -35,7 +35,7 @@ public class BookControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void getAllBooks_shouldReturnBookList() throws Exception {
+    void getAllBooks_shouldReturnBookList() throws Exception {
         // perform GET request to endpoint /books/list
         // make sure that OK (200) response is returned
         // and ResponseEntity status is okay
@@ -45,7 +45,7 @@ public class BookControllerTest {
     }
 
     @Test
-    public void createBook_shouldCreateBook() throws Exception {
+    void createBook_shouldCreateBook() throws Exception {
         // create author
         Author author = new Author("J.K.Rowling");
         author.setId(1);
@@ -62,7 +62,7 @@ public class BookControllerTest {
     }
 
     @Test
-    public void getBookById_shouldReturnBook() throws Exception {
+    void getBookById_shouldReturnBook() throws Exception {
         Author author = new Author("J.K.Rowling");
         author.setId(1);
         Book book = new Book("Harry Potter", author, BookGenre.FANTASY);
@@ -76,7 +76,7 @@ public class BookControllerTest {
     }
 
     @Test
-    public void deleteBookById_shouldDeleteBook() throws Exception {
+    void deleteBookById_shouldDeleteBook() throws Exception {
         Author author = new Author("J.K.Rowling");
         Book book = new Book("Harry Potter", author, BookGenre.FANTASY);
         book.setId(1);
@@ -89,7 +89,7 @@ public class BookControllerTest {
     }
 
     @Test
-    public void deleteBookById_shouldNotDeleteBook() throws Exception {
+    void deleteBookById_shouldNotDeleteBook() throws Exception {
         when(bookService.getById(1)).thenReturn(null);
         mockMvc.perform(delete("/books/deleteBookById")
                 .param("id", "1")

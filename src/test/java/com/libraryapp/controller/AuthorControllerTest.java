@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class AuthorControllerTest {
+class AuthorControllerTest {
 
     @MockBean
     private AuthorService authorService;
@@ -32,14 +32,14 @@ public class AuthorControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void getAllAuthors_shouldReturnAuthorList() throws Exception {
+    void getAllAuthors_shouldReturnAuthorList() throws Exception {
         List<Author> authorList = List.of(new Author(), new Author());
         when(authorService.getAll()).thenReturn(authorList);
         mockMvc.perform(get("/authors/list")).andExpect(status().isOk());
     }
 
     @Test
-    public void createAuthor_shouldCreateAuthor() throws Exception {
+    void createAuthor_shouldCreateAuthor() throws Exception {
         Author author = new Author("J.K.Rowling");
         author.setId(1);
         when(authorService.create("J.K.Rowling")).thenReturn(author);
@@ -50,7 +50,7 @@ public class AuthorControllerTest {
     }
 
     @Test
-    public void getAuthorById_shouldReturnAuthor() throws Exception {
+    void getAuthorById_shouldReturnAuthor() throws Exception {
         Author author = new Author("J.K.Rowling");
         author.setId(1);
         int expectedId = 1;
@@ -61,7 +61,7 @@ public class AuthorControllerTest {
                 .andExpect(status().isOk());
     }
     @Test
-    public void deleteAuthorById_shouldDeleteAuthor() throws Exception {
+    void deleteAuthorById_shouldDeleteAuthor() throws Exception {
         Author author = new Author();
         author.setId(1);
         when(authorService.getById(1)).thenReturn(author);
@@ -70,7 +70,7 @@ public class AuthorControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
     }
     @Test
-    public void deleteAuthorById_shouldNotDeleteAuthor() throws Exception {
+    void deleteAuthorById_shouldNotDeleteAuthor() throws Exception {
         when(authorService.getById(1)).thenReturn(null);
         mockMvc.perform(delete("/authors/deleteAuthorById")
                 .param("id", "1")
