@@ -34,7 +34,7 @@ public class UserController {
     public ResponseEntity<User> getUserByUsername(@RequestParam("username") String username){
         return ResponseEntity.ok(userService.getUserByUsername(username));
     }
-    @DeleteMapping("/deleteUserByUsername")
+    @DeleteMapping("/delete")
     public ResponseEntity<?> deleteUserByUsername(@RequestParam("username") String username){
         User userToDelete = userService.getUserByUsername(username);
         if(userToDelete != null){
@@ -44,15 +44,15 @@ public class UserController {
             return new ResponseEntity<>("Cannot remove user as it doesn't exist", HttpStatus.BAD_REQUEST);
         }
     }
-    @GetMapping("/getAllUsers")
+    @GetMapping("/list")
     public ResponseEntity<List<User>> getAllUsers(){
         return ResponseEntity.ok(userService.getAllUsers());
     }
-    @GetMapping("/getUserById")
+    @GetMapping("/get")
     public ResponseEntity<User> getUserById(@RequestParam("id") int id){
         return ResponseEntity.ok(userService.getUserById(id));
     }
-    @PostMapping("/updatePasswordByUsername")
+    @PostMapping("/update/password")
     public ResponseEntity<User> updatePasswordByUsername(@RequestParam("username") String username,
                                                          @RequestParam("newPassword") String newPassword){
         userService.updatePasswordByUsername(username, newPassword);
