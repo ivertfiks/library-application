@@ -20,16 +20,6 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/register")
-    public ResponseEntity<User> create(@RequestParam("username") String username,
-                                       @RequestParam("password") String password,
-                                       @RequestParam("name") String name){
-        try {
-            return ResponseEntity.ok(userService.createUser(username, password, name));
-        } catch (DuplicateUserException e) {
-            throw new RuntimeException(e);
-        }
-    }
     @GetMapping("/getUserByUsername")
     public ResponseEntity<User> getUserByUsername(@RequestParam("username") String username){
         return ResponseEntity.ok(userService.getUserByUsername(username));
