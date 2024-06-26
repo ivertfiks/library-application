@@ -1,9 +1,9 @@
 package com.libraryapp.service;
 
+import com.libraryapp.entity.Book;
 import com.libraryapp.entity.User;
 import com.libraryapp.entity.exceptions.DuplicateUserException;
 import com.libraryapp.repository.UserRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final BookService bookService;
     private final BCryptPasswordEncoder encoder;
 
     public User createUser(String username, String password, String name) throws DuplicateUserException {
@@ -39,6 +40,14 @@ public class UserService {
 
     public User getUserById(int id){
         return userRepository.findById(id).get();
+    }
+
+    public User addReadingBook(String username, String bookTitle){
+        User user = userRepository.getUserByUsername(username);
+        List<Book> readingBooks = user.getReadingBooks();
+        readingBooks.add(bookService.getByTitle(bookTitle));
+        user.setReadingBooks(readingBooks);
+        return userRepository.save(user);
     }
 
     public void updatePasswordByUsername(String username, String newPassword){

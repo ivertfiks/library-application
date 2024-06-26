@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface BookRepository extends CrudRepository<Book, Integer> {
-
     List<Book> getBooksByAuthor(Author author);
     List<Book> getBooksByGenre(BookGenre genre);
+    Book getBookByTitle(String title);
 }

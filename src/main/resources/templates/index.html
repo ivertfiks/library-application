@@ -1,10 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Онлайн Библиотека</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <h1>Онлайн Библиотека</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#books">Книги</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <aside class="sidebar">
+            <div class="filter">
+                <h2>Related Searches</h2>
+                <div class="filter-group">
+                    <h3>Subject</h3>
+                    <ul>
+                        <li>Love stories (18)</li>
+                        <li>Rich people (3)</li>
+                        <li>Humorous stories (2)</li>
+                        <li>Widows (2)</li>
+                        <li>Women (11)</li>
+                        <li>Babysitters (25)</li>
+                        <li>Law firms (9)</li>
+                    </ul>
+                </div>
+                <div class="filter-group">
+                    <h3>Narrow Your Search</h3>
+                    <label><input type="checkbox" checked> Books</label><br>
+                    <label><input type="checkbox"> Electronic Resources</label><br>
+                    <label><input type="checkbox"> eBooks</label><br>
+                    <label><input type="checkbox"> Sound Recording</label><br>
+                    <label><input type="checkbox"> Large Print</label><br>
+                    <label><input type="checkbox"> Audio eBooks</label>
+                </div>
+            </div>
+        </aside>
+        
+        <section class="content">
+            <div class="sorting">
+                <label for="sort">Sort by:</label>
+                <select id="sort" onchange="sortBooks()">
+                    <option value="default">Default Sorting</option>
+                    <option value="title">Title</option>
+                    <option value="author">Author</option>
+                </select>
+            </div>
+            
+            <div class="book-list" id="book-list">
+                <div class="book">
+                    <img src="book1.jpg" alt="Название книги 1">
+                    <div class="book-info">
+                        <h3 class="title">The Great Gatsby</h3>
+                        <p class="author">Author: F. Scott Fitzgerald</p>
+                        <p>Edition: First Edition</p>
+                        <p>Local Availability: 0 (of 1)</p>
+                        <p>Rating: ★★★☆☆</p>
+                        <p>ISBN: 9781581573268</p>
+                        <p>There are many variations of passages of Lorem Ipsum available...</p>
+                        <button class="read-more">Read More</button>
+                    </div>
+                </div>
+                <div class="book">
+                    <img src="book2.jpg" alt="Название книги 2">
+                    <div class="book-info">
+                        <h3 class="title">The Sonic Boom</h3>
+                        <p class="author">Author: Joel Beckerman</p>
+                        <p>Edition: First Edition</p>
+                        <p>Local Availability: 2 (of 5)</p>
+                        <p>Rating: ★★★★☆</p>
+                        <p>ISBN: 9780544557260</p>
+                        <p>How sound transforms the way we think, feel, and buy...</p>
+                        <button class="read-more">Read More</button>
+                    </div>
+                </div>
 
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Онлайн Библиотека</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

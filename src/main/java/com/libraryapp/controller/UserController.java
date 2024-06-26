@@ -1,7 +1,6 @@
 package com.libraryapp.controller;
 
 import com.libraryapp.entity.User;
-import com.libraryapp.entity.exceptions.DuplicateUserException;
 import com.libraryapp.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

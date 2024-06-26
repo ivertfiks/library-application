@@ -5,11 +5,9 @@ import com.libraryapp.entity.Book;
 import com.libraryapp.entity.enums.BookGenre;
 import com.libraryapp.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,6 +33,10 @@ public class BookService {
         return bookRepository.findById(id).get();
     }
 
+    public Book getByTitle(String title){
+        return bookRepository.getBookByTitle(title);
+    }
+
     public void deleteById(int id) {
         bookRepository.deleteById(id);
     }
@@ -46,8 +48,4 @@ public class BookService {
     public List<Book> getBooksByGenre(BookGenre genre){
         return getBooksByGenre(genre);
     }
-
-    //TODO: add method to get books by author
-
-    //TODO: add method to get books by genre
 }
