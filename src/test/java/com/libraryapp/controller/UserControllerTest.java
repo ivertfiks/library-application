@@ -1,7 +1,7 @@
 package com.libraryapp.controller;
 
 import com.libraryapp.entity.User;
-import com.libraryapp.service.UserService;
+import com.libraryapp.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 class UserControllerTest {
     @MockBean
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
     @Autowired
     private MockMvc mockMvc;
 
@@ -32,7 +32,7 @@ class UserControllerTest {
     void createUser_shouldCreateUser() throws Exception {
         User user = new User("name", "username", "password");
         user.setId(1);
-        when(userService.createUser("username", "password", "name")).thenReturn(user);
+        when(userServiceImpl.createUser("username", "password", "name")).thenReturn(user);
         mockMvc.perform(post("/users/register")
                 .param("username", "name")
                 .param("password", "password")
@@ -45,7 +45,7 @@ class UserControllerTest {
     void getUserByUsername_shouldReturnUserByUsername() throws Exception {
         User user = new User("name", "username", "password");
         user.setId(1);
-        when(userService.getUserByUsername("username")).thenReturn(user);
+        when(userServiceImpl.getUserByUsername("username")).thenReturn(user);
         mockMvc.perform(get("/users/getUserByUsername")
                 .param("username", "username")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -55,7 +55,7 @@ class UserControllerTest {
     @WithMockUser(username = "username", roles = {"User"})
     void deleteUserByUsername_shouldDeleteUserByUsername() throws Exception {
         User user = new User("user", "username", "password");
-        when(userService.getUserByUsername("username")).thenReturn(user);
+        when(userServiceImpl.getUserByUsername("username")).thenReturn(user);
         mockMvc.perform(delete("/users/deleteUserByUsername")
                 .param("username", "username")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -74,7 +74,7 @@ class UserControllerTest {
     @WithMockUser(username = "username", roles = {"User"})
     void getAllUsers_shouldReturnAllUsers() throws Exception {
         List<User> userList = List.of(new User(), new User());
-        when(userService.getAllUsers()).thenReturn(userList);
+        when(userServiceImpl.getAllUsers()).thenReturn(userList);
         mockMvc.perform(get("/users/getAllUsers")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -84,7 +84,7 @@ class UserControllerTest {
     void getUserById_shouldReturnUsersById() throws Exception {
         User user = new User();
         user.setId(1);
-        when(userService.getUserById(1)).thenReturn(user);
+        when(userServiceImpl.getUserById(1)).thenReturn(user);
         mockMvc.perform(get("/users/getUserById")
                 .param("id", "1")
                 .contentType(MediaType.APPLICATION_JSON))

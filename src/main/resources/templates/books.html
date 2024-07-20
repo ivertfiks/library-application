@@ -1,53 +1,30 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: content">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Название книги - Онлайн Библиотека</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Books</title>
+    <link rel="stylesheet" th:href="@{styles.css}">
 </head>
 <body>
-    <header>
-        <h1>Онлайн Библиотека</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="index.html#books">Книги</a></li>
-                <li><a href="index.html#about">О нас</a></li>
-                <li><a href="index.html#contact">Контакты</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <main>
-        <section class="book-detail">
-            <div class="book-detail-header">
-                <img src="book1.jpg" alt="Название книги 1">
-                <div class="book-detail-info">
-                    <h2>Название книги 1</h2>
-                    <p><strong>Автор:</strong> Автор 1</p>
-                    <p><strong>ISBN:</strong> 9781581573268</p>
-                    <p><strong>Издание:</strong> Первое издание</p>
-                    <p><strong>Локальная доступность:</strong> 0 (из 1)</p>
-                    <p><strong>Рейтинг:</strong> ★★★☆☆</p>
-                    <button class="add-to-cart">Читать</button>
-                </div>
+<div class="book-list">
+    <h1>Books</h1>
+    <ul>
+        <li th:each="book : ${books}">
+            <span th:text="${book.title}">Book Title</span>
+            <span th:text="${book.author.name}">Author</span>
+            <span th:text="${book.genre}">Genre</span>
+            <div class="actions">
+                <form th:action="@{/book/{id}/add-to-finished(id=${book.id})}" method="post">
+                    <button type="submit">Finished</button>
+                </form>
+                <form th:action="@{/book/{id}/add-to-reading(id=${book.id})}" method="post">
+                    <button type="submit">Reading</button>
+                </form>
+                <form th:action="@{/book/{id}/add-to-want-to-read(id=${book.id})}" method="post">
+                    <button type="submit">Want to Read</button>
+                </form>
             </div>
-            <div class="book-detail-description">
-                <h3>Описание</h3>
-                <p>Здесь находится подробное описание книги. Это может включать аннотацию, основные темы, информацию о сюжете и так далее. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae ligula eget lorem suscipit tempor nec ut leo. Sed et nisi ac risus auctor aliquet. Nulla facilisi. Curabitur volutpat est nec nunc consectetur, in scelerisque libero tristique. Suspendisse potenti.</p>
-                <h3>Отзывы</h3>
-                <p>Отзыв 1: Эта книга замечательная! - Читатель 1</p>
-                <p>Отзыв 2: Очень понравилось, рекомендую. - Читатель 2</p>
-
-            </div>
-        </section>
-    </main>
-    
-    <footer>
-        <p>&copy; 2024 Онлайн Библиотека</p>
-    </footer>
-
-    <script src="script.js"></script>
+        </li>
+    </ul>
+</div>
 </body>
 </html>
