@@ -2,12 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: content">
 <head>
     <title>Login</title>
-    <link rel="stylesheet" th:href="@{styles.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <div class="form-container">
     <h1>Login</h1>
-    <form th:action="@{/login}" method="post">
+    <form th:action="@{/users/login}" method="post">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required/>
 
