@@ -1,8 +1,7 @@
 package com.libraryapp.controller;
 
 import com.libraryapp.entity.User;
-import com.libraryapp.entity.exceptions.DuplicateUserException;
-import com.libraryapp.service.UserService;
+import com.libraryapp.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,45 +17,35 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceImpl userServiceImpl;
 
-    @PostMapping("/register")
-    public ResponseEntity<User> create(@RequestParam("username") String username,
-                                       @RequestParam("password") String password,
-                                       @RequestParam("name") String name){
-        try {
-            return ResponseEntity.ok(userService.createUser(username, password, name));
-        } catch (DuplicateUserException e) {
-            throw new RuntimeException(e);
-        }
-    }
     @GetMapping("/getUserByUsername")
     public ResponseEntity<User> getUserByUsername(@RequestParam("username") String username){
-        return ResponseEntity.ok(userService.getUserByUsername(username));
+        return ResponseEntity.ok(userServiceImpl.getUserByUsername(username));
     }
-    @DeleteMapping("/deleteUserByUsername")
+    @DeleteMapping("/delete")
     public ResponseEntity<?> deleteUserByUsername(@RequestParam("username") String username){
-        User userToDelete = userService.getUserByUsername(username);
+        User userToDelete = userServiceImpl.getUserByUsername(username);
         if(userToDelete != null){
-            userService.deleteUserByUsername(username);
+            userServiceImpl.deleteUserByUsername(username);
             return ResponseEntity.ok(userToDelete);
         }else{
             return new ResponseEntity<>("Cannot remove user as it doesn't exist", HttpStatus.BAD_REQUEST);
         }
     }
-    @GetMapping("/getAllUsers")
+    @GetMapping("/list")
     public ResponseEntity<List<User>> getAllUsers(){
-        return ResponseEntity.ok(userService.getAllUsers());
+        return ResponseEntity.ok(userServiceImpl.getAllUsers());
     }
-    @GetMapping("/getUserById")
+    @GetMapping("/get")
     public ResponseEntity<User> getUserById(@RequestParam("id") int id){
-        return ResponseEntity.ok(userService.getUserById(id));
+        return ResponseEntity.ok(userServiceImpl.getUserById(id));
     }
-    @PostMapping("/updatePasswordByUsername")
+    @PostMapping("/update/password")
     public ResponseEntity<User> updatePasswordByUsername(@RequestParam("username") String username,
                                                          @RequestParam("newPassword") String newPassword){
-        userService.updatePasswordByUsername(username, newPassword);
-        User user = userService.getUserByUsername(username);
+        userServiceImpl.updatePasswordByUsername(username, newPassword);
+        User user = userServiceImpl.getUserByUsername(username);
         return ResponseEntity.ok(user);
     }
 }

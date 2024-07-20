@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Library App</title>
+    <link rel="stylesheet" th:href="@{styles.css}">
 </head>
 <body>
-
+<header>
+    <nav>
+        <a href="/" class="logo">Library App</a>
+        <ul>
+            <li><a th:href="@{/books}">Books</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div th:replace="${content}"></div>
+</main>
+<footer>
+    <p>&copy; 2024 Library App</p>
+</footer>
 </body>
 </html>
