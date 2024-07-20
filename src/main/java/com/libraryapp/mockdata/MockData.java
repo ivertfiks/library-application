@@ -6,12 +6,10 @@ import com.libraryapp.service.BookService;
 import com.libraryapp.service.impl.UserServiceImpl;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-@RequiredArgsConstructor
 public class MockData {
 
     // create variables for userService, bookService, authorService

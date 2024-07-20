@@ -6,6 +6,7 @@ import com.libraryapp.entity.exceptions.DuplicateUserException;
 import com.libraryapp.repository.UserRepository;
 import com.libraryapp.service.BookService;
 import com.libraryapp.service.UserService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,7 @@ public class UserServiceImpl {
         return userRepository.findById(id).get();
     }
 
+    @Transactional
     public User addReadingBook(String username, String bookTitle){
         User user = userRepository.getUserByUsername(username);
         List<Book> readingBooks = user.getReadingBooks();
