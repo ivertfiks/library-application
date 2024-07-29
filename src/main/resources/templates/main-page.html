@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library Home</title>
+    <title>Main-page</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">LibraryApp</a>
+            <a class="navbar-brand" href="#">BrandName</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -42,35 +43,8 @@
     </header>
 
     <main class="container mt-5">
-        <h1>Books Available</h1>
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Title</th>
-                            <th>Author</th>
-                            <th>Genre</th>
-                            <th class="text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="book : ${books}">
-                            <td th:text="${book.id}"></td>
-                            <td th:text="${book.title}"></td>
-                            <td th:text="${book.author.name}"></td>
-                            <td th:text="${book.genre}"></td>
-                            <td class="text-right">
-                                <button class="btn btn-primary btn-sm">В планах</button>
-                                <button class="btn btn-warning btn-sm">Читаю</button>
-                                <button class="btn btn-success btn-sm">Прочитал</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <h1>Welcome to the main page</h1>
+        <p>This is the content of the main page.</p>
     </main>
 
     <!-- Bootstrap JS and dependencies -->

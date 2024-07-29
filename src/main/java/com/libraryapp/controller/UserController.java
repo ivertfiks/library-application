@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,8 +35,10 @@ public class UserController {
         }
     }
     @GetMapping("/list")
-    public ResponseEntity<List<User>> getAllUsers(){
-        return ResponseEntity.ok(userServiceImpl.getAllUsers());
+    public String getAllUsers(Model model) {
+        List<User> users = userServiceImpl.getAllUsers();
+        model.addAttribute("users", users);
+        return "index"; // Имя Thymeleaf шаблона (userList.html)
     }
     @GetMapping("/get")
     public ResponseEntity<User> getUserById(@RequestParam("id") int id){
