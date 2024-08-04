@@ -3,6 +3,7 @@ package com.libraryapp.service.impl;
 import com.libraryapp.entity.Book;
 import com.libraryapp.entity.User;
 import com.libraryapp.entity.exceptions.DuplicateUserException;
+import com.libraryapp.repository.BookRepository;
 import com.libraryapp.repository.UserRepository;
 import com.libraryapp.service.BookService;
 import com.libraryapp.service.UserService;
@@ -19,6 +20,7 @@ public class UserServiceImpl {
 
     private final UserRepository userRepository;
     private final BookService bookService;
+    private final BookRepository bookRepository;
     private final BCryptPasswordEncoder encoder;
 
     public User createUser(String username, String password, String name) throws DuplicateUserException {
@@ -60,4 +62,26 @@ public class UserServiceImpl {
         user.setPassword(encodedPassword);
         userRepository.save(user);
     }
+
+    public void addBookToWantToRead(int userId, int bookId) {
+        User user = getUserById(userId);
+        Book book = bookRepository.findById(bookId).orElseThrow(() -> new RuntimeException("Book not found"));
+        user.getWantToReadBooks().add(book);
+        userRepository.save(user);
+    }
+
+    public void addBookToReading(int userId, int bookId) {
+        User user = getUserById(userId);
+        Book book = bookRepository.findById(bookId).orElseThrow(() -> new RuntimeException("Book not found"));
+        user.getReadingBooks().add(book);
+        userRepository.save(user);
+    }
+
+    public void addBookToFinished(int userId, int bookId) {
+        User user = getUserById(userId);
+        Book book = bookRepository.findById(bookId).orElseThrow(() -> new RuntimeException("Book not found"));
+        user.getFinishedBooks().add(book);
+        userRepository.save(user);
+    }
+
 }

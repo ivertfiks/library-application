@@ -13,4 +13,6 @@ public class SecurityConstants {
     private static RandomKeyGeneratior RandomKeyGenerator;
     public static final String SECRET_KEY = RandomKeyGenerator.generateRandomKey();
 
+    public static final String LOGOUT_PATH = "/logout";
+
 }

@@ -38,7 +38,7 @@ public class UserController {
     public String getAllUsers(Model model) {
         List<User> users = userServiceImpl.getAllUsers();
         model.addAttribute("users", users);
-        return "index"; // Имя Thymeleaf шаблона (userList.html)
+        return "index";
     }
     @GetMapping("/get")
     public ResponseEntity<User> getUserById(@RequestParam("id") int id){
@@ -50,5 +50,24 @@ public class UserController {
         userServiceImpl.updatePasswordByUsername(username, newPassword);
         User user = userServiceImpl.getUserByUsername(username);
         return ResponseEntity.ok(user);
+    }
+
+    @PostMapping("/users/addBookToWantToRead")
+    public ResponseEntity<?> addBookToWantToRead(@RequestParam("userId") String userId,
+                                                 @RequestParam("bookId") int bookId) {
+        userServiceImpl.addBookToWantToRead(Integer.parseInt(userId), bookId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/addBookToReading")
+    public ResponseEntity<?> addBookToReading(@RequestParam("userId") int userId, @RequestParam("bookId") int bookId) {
+        userServiceImpl.addBookToReading(userId, bookId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/addBookToFinished")
+    public ResponseEntity<?> addBookToFinished(@RequestParam("userId") int userId, @RequestParam("bookId") int bookId) {
+        userServiceImpl.addBookToFinished(userId, bookId);
+        return ResponseEntity.ok().build();
     }
 }
