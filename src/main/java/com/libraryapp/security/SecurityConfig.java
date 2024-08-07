@@ -42,7 +42,7 @@ public class SecurityConfig {
                     .anyRequest().authenticated()
             )
             .formLogin(form -> form
-                .loginPage(SecurityConstants.LOGIN_PAGE)
+                .defaultSuccessUrl("/")
                 .permitAll()
             )
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

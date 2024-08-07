@@ -10,7 +10,7 @@ public class HomePageController {
 
     @RequestMapping("/")
     public String getHomePage(){
-        return "home";
+        return "index";
     }
 
     @RequestMapping("/loginPage")
